@@ -10,7 +10,6 @@ const urlWeather = 'https://api.darksky.net/forecast';
 const accessKeyWeather = '67d6aac020fb58bdbd635673bac38b2f';
 
 // The below values are hardcoded because I could not find a way to pass them from a function.
-// See comments in ./geoCoordinates.js
 const lat = 40.757976
 const lon = -73.979414
 
@@ -46,9 +45,6 @@ describe('Darksky endpoint call', () => {
     chai.request(urlWeather + '/' + accessKeyWeather)
       .get('/' + lat + ',' + lon)
       .end((err, res) => {
-        // Postman offers a built-in json schema assertion called Tiny Validator,
-        // but I could not find similar tools for mocha/chai.
-        // Therefore, I am simply asserting every value individually.
         expect(res.body.currently.time).to.be.a('number')
         expect(res.body.currently.summary).to.be.a('string')
         expect(res.body.currently.icon).to.be.a('string')
